@@ -2,13 +2,13 @@
 /*
 Plugin Name: Hanja Test Plugin
 Description: Provides Hanja proficiency test with membership tracking and Hanja database management.
-Version: 0.5
+Version: 0.6
 Author: Codex
 */
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
-define('HANJA_PLUGIN_VERSION', '0.5');
+define('HANJA_PLUGIN_VERSION', '0.6');
 
 // Create table for storing Hanja characters
 function hanja_install() {
@@ -41,6 +41,7 @@ function hanja_enqueue_assets() {
     wp_add_inline_style('hanja-fonts', 'body{font-family:"Noto Sans KR",sans-serif;}');
     // Prevent layout break by scoping container width inside wrapper
     wp_add_inline_style('hanja-fonts', '.hanja-wrapper .container{max-width:100%!important;width:100%!important;}');
+    wp_add_inline_style('hanja-fonts', '.hanja-wrapper .lg\\:grid-cols-3{grid-template-columns:repeat(2,minmax(0,1fr));}');
 
     wp_enqueue_script('hanja-bundle', plugins_url('assets/index-BBTAKJYO.js', __FILE__), array(), HANJA_PLUGIN_VERSION, true);
     wp_enqueue_script('hanja-plugin', plugins_url('assets/hanja-plugin.js', __FILE__), array('hanja-bundle'), HANJA_PLUGIN_VERSION, true);
