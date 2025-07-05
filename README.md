@@ -1,6 +1,6 @@
 # Hanja WordPress Plugin
 
-Current version: **0.8**
+Current version: **0.9**
 
 This plugin embeds the Hanja Proficiency Test React application into WordPress. It includes a shortcode to show a login form and stores each user's score.
 
@@ -13,7 +13,7 @@ This plugin embeds the Hanja Proficiency Test React application into WordPress. 
 5. Admins can review results under **Hanja Results** in the dashboard.
 6. Use **Manage Hanja** under the same menu to import a CSV or text file of characters and view saved entries.
 
-The plugin automatically loads Tailwind CSS and Google fonts so the interface looks the same as the standalone app. The test output is wrapped in a custom class and follows the width defined by your theme.
+The plugin automatically loads Tailwind CSS and Google fonts so the interface looks the same as the standalone app. The test output is wrapped in a custom class and now fully inherits the width defined by your theme.
 The level selection cards now show at most two items per row and only display the total question count and time to avoid overly tall layouts.
 The header padding has been further reduced to roughly half its previous height so more content is visible on smaller screens.
 
