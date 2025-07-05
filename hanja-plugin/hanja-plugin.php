@@ -2,20 +2,22 @@
 /*
 Plugin Name: Hanja Test Plugin
 Description: Provides Hanja proficiency test with membership tracking.
-Version: 0.1
+Version: 0.2
 Author: Codex
 */
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
+define('HANJA_PLUGIN_VERSION', '0.2');
+
 // Enqueue frontend assets
 function hanja_enqueue_assets() {
-    wp_enqueue_script('hanja-tailwind', 'https://cdn.tailwindcss.com', array(), null, false);
-    wp_enqueue_style('hanja-fonts', 'https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap', array(), null);
+    wp_enqueue_script('hanja-tailwind', 'https://cdn.tailwindcss.com', array(), HANJA_PLUGIN_VERSION, false);
+    wp_enqueue_style('hanja-fonts', 'https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap', array(), HANJA_PLUGIN_VERSION);
     wp_add_inline_style('hanja-fonts', 'body{font-family:"Noto Sans KR",sans-serif;}');
 
-    wp_enqueue_script('hanja-bundle', plugins_url('assets/index-BBTAKJYO.js', __FILE__), array(), '1.0', true);
-    wp_enqueue_script('hanja-plugin', plugins_url('assets/hanja-plugin.js', __FILE__), array('hanja-bundle'), '1.0', true);
+    wp_enqueue_script('hanja-bundle', plugins_url('assets/index-BBTAKJYO.js', __FILE__), array(), HANJA_PLUGIN_VERSION, true);
+    wp_enqueue_script('hanja-plugin', plugins_url('assets/hanja-plugin.js', __FILE__), array('hanja-bundle'), HANJA_PLUGIN_VERSION, true);
     wp_localize_script('hanja-plugin', 'HanjaAjax', array('ajax_url' => admin_url('admin-ajax.php')));
 }
 add_action('wp_enqueue_scripts', 'hanja_enqueue_assets');
