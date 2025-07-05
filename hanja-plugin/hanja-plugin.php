@@ -10,9 +10,13 @@ if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
 // Enqueue frontend assets
 function hanja_enqueue_assets() {
+    wp_enqueue_script('hanja-tailwind', 'https://cdn.tailwindcss.com', array(), null, false);
+    wp_enqueue_style('hanja-fonts', 'https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap', array(), null);
+    wp_add_inline_style('hanja-fonts', 'body{font-family:"Noto Sans KR",sans-serif;}');
+
     wp_enqueue_script('hanja-bundle', plugins_url('assets/index-BBTAKJYO.js', __FILE__), array(), '1.0', true);
-    wp_enqueue_script("hanja-plugin", plugins_url("assets/hanja-plugin.js", __FILE__), array("hanja-bundle"), "1.0", true);
-    wp_localize_script("hanja-plugin", "HanjaAjax", array("ajax_url" => admin_url("admin-ajax.php")));
+    wp_enqueue_script('hanja-plugin', plugins_url('assets/hanja-plugin.js', __FILE__), array('hanja-bundle'), '1.0', true);
+    wp_localize_script('hanja-plugin', 'HanjaAjax', array('ajax_url' => admin_url('admin-ajax.php')));
 }
 add_action('wp_enqueue_scripts', 'hanja_enqueue_assets');
 
