@@ -2,13 +2,13 @@
 /*
 Plugin Name: Hanja Test Plugin
 Description: Provides Hanja proficiency test with membership tracking and Hanja database management.
-Version: 0.3
+Version: 0.4
 Author: Codex
 */
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
-define('HANJA_PLUGIN_VERSION', '0.3');
+define('HANJA_PLUGIN_VERSION', '0.4');
 
 // Create table for storing Hanja characters
 function hanja_install() {
@@ -20,6 +20,19 @@ function hanja_install() {
     dbDelta($sql);
 }
 register_activation_hook(__FILE__, 'hanja_install');
+
+// Cleanup tables and user meta on uninstall
+function hanja_uninstall() {
+    global $wpdb;
+    $table = $wpdb->prefix . 'hanja_chars';
+    $wpdb->query("DROP TABLE IF EXISTS $table");
+
+    $meta_keys = array('hanja_result', 'hanja_participated');
+    foreach ($meta_keys as $key) {
+        $wpdb->query($wpdb->prepare("DELETE FROM {$wpdb->usermeta} WHERE meta_key = %s", $key));
+    }
+}
+register_uninstall_hook(__FILE__, 'hanja_uninstall');
 
 // Enqueue frontend assets
 function hanja_enqueue_assets() {
